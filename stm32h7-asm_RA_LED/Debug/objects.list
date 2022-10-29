@@ -1,0 +1,2 @@
+"./Core/Src/Main.o"
+"./Core/Startup/startup_stm32h750xbhx.o"
