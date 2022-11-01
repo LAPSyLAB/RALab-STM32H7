@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "D:\\RAVINOR\\Apps\\xPack\\xpack-windows-build-tools-4.3.0-1\\bin\\make.exe"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
