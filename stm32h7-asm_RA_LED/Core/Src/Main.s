@@ -48,12 +48,6 @@
 	.equ     LEDs_OFF,       0x00002000
 	.equ     LEDs_ON,   	 0x20000000
 
-// Comments :
-// Debugging in SysTick_Handler doesn't work on RAM .ld script used
-// FLASH based script works better
-
-
-
 // Start of data section
  		.data
 
@@ -86,20 +80,20 @@ main:
   		ldr r0, =VSOTA   // Naslov od STEV1 -> r0
   		str r3,[r0]		// iz registra r3 -> na naslov v r0
 
-	    bl 	INIT_IO
+	    bl 	INIT_IO     // Priprava za kontrolo LED diode
 
 loop:
-		bl LED_ON
+		bl LED_ON       // Vklop LED diode
 
 		mov r0,#500
-		bl DELAY	 	// Software Delay
+		bl DELAY	 	// Zakasnitev: r0 x 1msec
 
-		bl LED_OFF
+		bl LED_OFF      // Izlop LED diode
 
 		mov r0,#500
-		bl DELAY	 	// Software Delay
+		bl DELAY	 	// Zakasnitev: r0 x 1msec
 
-		b loop                      // Jump to loop
+		b loop          // skok na vrstico loop:
 
 
 __end: 	b 	__end

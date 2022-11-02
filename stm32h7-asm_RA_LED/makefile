@@ -1,10 +1,18 @@
-TARGET=./out/Main
+
+
+ifdef OS
+	TARGET=.\out\Main
+else
+	TARGET=./out/Main
+endif
+
 srcs = $(wildcard Core/**/*.s) \
 
 OBJS = $(srcs:.s=.o) 
 INCLUDES = -I.
 
-LINKER_SCRIPT = STM32H750XBHX_FLASH.ld 
+LINKER_SCRIPT = STM32H750XBHX_FLASH.ld    # For storing program in FLASH 
+# LINKER_SCRIPT = STM32H750XBHX_RAM.ld      # For testing program in RAM
 CFLAGS += -mcpu=cortex-m7 -mthumb # processor setup
 CFLAGS += -O0 # optimization is off
 CFLAGS += -g3 # generate debug info
@@ -38,6 +46,7 @@ ifdef OS
 else
 	CROSS_COMPILE = arm-none-eabi-
 endif
+
 CC = $(CROSS_COMPILE)gcc
 LD = $(CROSS_COMPILE)ld
 OBJDUMP = $(CROSS_COMPILE)objdump
@@ -51,7 +60,9 @@ else
 	RM_CMD = rm -f
 endif
 
-all: $(SRCS) build size
+# all: $(SRCS) build size
+all: clean $(SRCS) build size
+
 	@echo "Successfully finished..."
 
 build: $(TARGET).elf $(TARGET).hex $(TARGET).bin $(TARGET).lst
@@ -96,5 +107,16 @@ ocd:
 
 burn:
 	@st-flash write $(TARGET).bin 0x8000000
+
+
+clean:
+	@echo "Cleaning..."
+	@$(RM_CMD) $(TARGET).elf
+	@$(RM_CMD) $(TARGET).bin
+	@$(RM_CMD) $(TARGET).map
+	@$(RM_CMD) $(TARGET).hex
+	@$(RM_CMD) $(TARGET).lst
+	@$(RM_CMD) $(TARGET).o
+
 
 .PHONY: all build size disass disass-all debug ocd burn
