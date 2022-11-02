@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug board",
+      "name": "Debug board windows",
       "cwd": "${workspaceRoot}",
       "executable": "./out/Main.elf",
       "request": "launch",
@@ -13,7 +13,20 @@
       "servertype": "stlink",
       "device": "STM32H750",
       "svdFile": "./STM32H750X.svd",
-      "showDevDebugOutput": true,
+      "showDevDebugOutput": "vscode",
+      "preLaunchTask": "Build",
+      "gdbPath": "D:\\RAVINOR\\Apps\\xPack\\xpack-arm-none-eabi-gcc-11.3.1-1.1\\bin\\arm-none-eabi-gdb.exe"
+    },
+    {
+      "name": "Debug board linux",
+      "cwd": "${workspaceRoot}",
+      "executable": "./out/Main.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "stlink",
+      "device": "STM32H750",
+      "svdFile": "./STM32H750X.svd",
+      "showDevDebugOutput": "vscode",
       "preLaunchTask": "Build"
     },
   ]
