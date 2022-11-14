@@ -29,11 +29,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  12 .debug_aranges 00000048  00000000  00000000  000201b0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_str    000000b1  00000000  00000000  000201f8  2**0
+ 13 .debug_str    0000008a  00000000  00000000  000201f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_ranges 00000020  00000000  00000000  000202b0  2**3
+ 14 .debug_ranges 00000020  00000000  00000000  00020288  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_frame  00000094  00000000  00000000  000202d0  2**2
+ 15 .debug_frame  00000094  00000000  00000000  000202a8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -90,29 +90,29 @@ main:
   		str r3,[r0]		// iz registra r3 -> na naslov v r0
 240002e6:	6003      	str	r3, [r0, #0]
 
-	    bl 	INIT_IO
+	    bl 	INIT_IO     // Priprava za kontrolo LED diode
 240002e8:	f000 f80e 	bl	24000308 <INIT_IO>
 
 240002ec <loop>:
 
 loop:
-		bl LED_ON
+		bl LED_ON       // Vklop LED diode
 240002ec:	f000 f81a 	bl	24000324 <LED_ON>
 
 		mov r0,#500
 240002f0:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
-		bl DELAY	 	// Software Delay
+		bl DELAY	 	// Zakasnitev: r0 x 1msec
 240002f4:	f000 f822 	bl	2400033c <DELAY>
 
-		bl LED_OFF
+		bl LED_OFF      // Izlop LED diode
 240002f8:	f000 f81a 	bl	24000330 <LED_OFF>
 
 		mov r0,#500
 240002fc:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
-		bl DELAY	 	// Software Delay
+		bl DELAY	 	// Zakasnitev: r0 x 1msec
 24000300:	f000 f81c 	bl	2400033c <DELAY>
 
-		b loop                      // Jump to loop
+		b loop          // skok na vrstico loop:
 24000304:	e7f2      	b.n	240002ec <loop>
 
 24000306 <__end>:
@@ -129,7 +129,7 @@ INIT_IO:
   	push {r5, r6, lr}
 24000308:	b560      	push	{r5, r6, lr}
 
-	// Enable GPIOD Peripheral Clock (bit 3 in AHB1ENR register)
+	// Enable GPIOI Peripheral Clock (bit 8 in AHB4ENR register)
 	ldr r6, = RCC_AHB4ENR       // Load peripheral clock reg address to r6
 2400030a:	4e13      	ldr	r6, [pc, #76]	; (24000358 <LOOP+0x16>)
 	ldr r5, [r6]                // Read its content to r5
@@ -161,7 +161,7 @@ INIT_IO:
 LED_ON:
     push {r5, r6, lr}
 24000324:	b560      	push	{r5, r6, lr}
-	// Set GPIOx Pins to 1 (through BSSR register)
+	// Set GPIOx Pins to 0 (through BSSR register)
 	ldr    r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
 24000326:	4e0d      	ldr	r6, [pc, #52]	; (2400035c <LOOP+0x1a>)
 	mov    r5, #LEDs_ON
@@ -176,7 +176,7 @@ LED_ON:
 LED_OFF:
     push {r5, r6, lr}
 24000330:	b560      	push	{r5, r6, lr}
-	// Set GPIOx Pins to 0 (through BSSR register)
+	// Set GPIOx Pins to 1 (through BSSR register)
 	ldr    r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
 24000332:	4e0a      	ldr	r6, [pc, #40]	; (2400035c <LOOP+0x1a>)
 	mov    r5, #LEDs_OFF
@@ -197,7 +197,7 @@ DELAY:
 2400033e <MSEC>:
 
 MSEC: ldr r1,=LEDDELAY
-2400033e:	f44f 41fa 	mov.w	r1, #32000	; 0x7d00
+2400033e:	f44f 417a 	mov.w	r1, #64000	; 0xfa00
 
 24000342 <LOOP>:
 LOOP:    subs r1, r1, #1
@@ -224,7 +224,7 @@ LOOP:    subs r1, r1, #1
 
 24000360 <Reset_Handler>:
 
-    .section  .text.Reset_Handler
+  .section  .text.Reset_Handler
   .weak  Reset_Handler
   .type  Reset_Handler, %function
 Reset_Handler:

@@ -59,8 +59,8 @@ all: main-build
 main-build: stm32h7-asm_RA_LED.elf secondary-outputs
 
 # Tool invocations
-stm32h7-asm_RA_LED.elf stm32h7-asm_RA_LED.map: $(OBJS) $(USER_OBJS) F:\Delovni\WorkSpaces_Local\STM32H750B-DK\STM32H750B-DK_Working_projects_Local\stm32h7-asm_RA_LED\STM32H750XBHX_RAM.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "stm32h7-asm_RA_LED.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"F:\Delovni\WorkSpaces_Local\STM32H750B-DK\STM32H750B-DK_Working_projects_Local\stm32h7-asm_RA_LED\STM32H750XBHX_RAM.ld" --specs=nosys.specs -Wl,-Map="stm32h7-asm_RA_LED.map" -Wl,--cref -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb
+stm32h7-asm_RA_LED.elf stm32h7-asm_RA_LED.map: $(OBJS) $(USER_OBJS) D:\Delovni\CubeIDE\Sluzba\RALab-STM32H7\stm32h7-asm_RA_LED\STM32H750XBHX_RAM.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "stm32h7-asm_RA_LED.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\Delovni\CubeIDE\Sluzba\RALab-STM32H7\stm32h7-asm_RA_LED\STM32H750XBHX_RAM.ld" --specs=nosys.specs -Wl,-Map="stm32h7-asm_RA_LED.map" -Wl,--cref -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb
 	@echo 'Finished building target: $@'
 	@echo ' '
 

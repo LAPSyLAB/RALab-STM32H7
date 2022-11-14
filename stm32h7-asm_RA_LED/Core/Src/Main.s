@@ -19,7 +19,7 @@
 
 // Constants
 
-	.equ     LEDDELAY,      32000
+	.equ     LEDDELAY,      64000
 
 // For LOOPTC Software delay
 // By default 64MHz internal HSI clock is enabled
@@ -45,8 +45,8 @@
 
 
 // Values for BSSR register - pin 13: LED is on, when GPIO is off
-	.equ     LEDs_OFF,       0x00002000
-	.equ     LEDs_ON,   	 0x20000000
+	.equ     LEDs_OFF,       0x00002000   	// Setting pin to 1 -> LED is off
+	.equ     LEDs_ON,   	 0x20000000   	// Setting pin to 0 -> LED is on
 
 // Start of data section
  		.data
@@ -103,7 +103,7 @@ __end: 	b 	__end
 INIT_IO:
   	push {r5, r6, lr}
 
-	// Enable GPIOD Peripheral Clock (bit 3 in AHB1ENR register)
+	// Enable GPIOI Peripheral Clock (bit 8 in AHB4ENR register)
 	ldr r6, = RCC_AHB4ENR       // Load peripheral clock reg address to r6
 	ldr r5, [r6]                // Read its content to r5
 	orr r5, #0x00000100          // Set bit 8 to enable GPIOI clock
@@ -122,7 +122,7 @@ INIT_IO:
 
 LED_ON:
     push {r5, r6, lr}
-	// Set GPIOx Pins to 1 (through BSSR register)
+	// Set GPIOx Pins to 0 (through BSSR register)
 	ldr    r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
 	mov    r5, #LEDs_ON
 	str    r5, [r6,#GPIOx_BSSR] // Write to BSRR register
@@ -130,7 +130,7 @@ LED_ON:
 
 LED_OFF:
     push {r5, r6, lr}
-	// Set GPIOx Pins to 0 (through BSSR register)
+	// Set GPIOx Pins to 1 (through BSSR register)
 	ldr    r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
 	mov    r5, #LEDs_OFF
 	str    r5, [r6,#GPIOx_BSSR] // Write to BSRR register
