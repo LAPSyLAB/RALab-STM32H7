@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project source="3.7.2" version="1.0">
-  This file is intended to be loaded by Logisim-evolution v3.7.2(https://github.com/logisim-evolution/).
+<project source="3.8.0" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v3.8.0(https://github.com/logisim-evolution/).
 
   <lib desc="#Wiring" name="0">
     <tool name="Pin">
@@ -139,7 +139,7 @@
     <comp lib="0" loc="(780,180)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
-      <a name="label" val="M_1ADD_0SUB"/>
+      <a name="label" val="M"/>
     </comp>
     <comp lib="1" loc="(170,390)" name="XOR Gate">
       <a name="facing" val="west"/>
@@ -159,23 +159,29 @@
     <comp lib="1" loc="(680,300)" name="XOR Gate">
       <a name="facing" val="south"/>
     </comp>
-    <comp lib="8" loc="(188,108)" name="Text">
+    <comp lib="8" loc="(185,105)" name="Text">
       <a name="text" val="Signed"/>
     </comp>
-    <comp lib="8" loc="(188,44)" name="Text">
+    <comp lib="8" loc="(185,40)" name="Text">
       <a name="text" val="UnSigned"/>
     </comp>
-    <comp lib="8" loc="(489,627)" name="Text">
+    <comp lib="8" loc="(485,625)" name="Text">
       <a name="text" val="Signed"/>
     </comp>
-    <comp lib="8" loc="(491,565)" name="Text">
+    <comp lib="8" loc="(490,565)" name="Text">
       <a name="text" val="UnSigned"/>
     </comp>
-    <comp lib="8" loc="(518,46)" name="Text">
+    <comp lib="8" loc="(515,45)" name="Text">
       <a name="text" val="UnSigned"/>
     </comp>
-    <comp lib="8" loc="(521,107)" name="Text">
+    <comp lib="8" loc="(520,105)" name="Text">
       <a name="text" val="Signed"/>
+    </comp>
+    <comp lib="8" loc="(880,175)" name="Text">
+      <a name="text" val="1 .. SUB"/>
+    </comp>
+    <comp lib="8" loc="(880,195)" name="Text">
+      <a name="text" val="0 .. ADD"/>
     </comp>
     <comp loc="(370,440)" name="FullAdder"/>
     <comp loc="(470,440)" name="FullAdder"/>
@@ -274,12 +280,12 @@
       <text dominant-baseline="central" font-family="SansSerif" font-size="14" text-anchor="middle" x="74" y="79">Co</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="14" text-anchor="middle" x="100" y="60">y</text>
       <text dominant-baseline="central" font-family="SansSerif" font-size="14" text-anchor="middle" x="79" y="60">x</text>
-      <circ-anchor facing="east" height="6" width="6" x="87" y="107"/>
-      <circ-port height="10" pin="310,120" width="10" x="55" y="75"/>
-      <circ-port height="10" pin="310,60" width="10" x="85" y="105"/>
-      <circ-port height="8" pin="90,40" width="8" x="96" y="46"/>
-      <circ-port height="8" pin="90,60" width="8" x="76" y="46"/>
-      <circ-port height="8" pin="90,90" width="8" x="116" y="76"/>
+      <circ-anchor facing="east" x="90" y="110"/>
+      <circ-port dir="in" pin="90,40" x="100" y="50"/>
+      <circ-port dir="in" pin="90,60" x="80" y="50"/>
+      <circ-port dir="in" pin="90,90" x="120" y="80"/>
+      <circ-port dir="out" pin="310,120" x="60" y="80"/>
+      <circ-port dir="out" pin="310,60" x="90" y="110"/>
     </appear>
     <comp lib="0" loc="(310,120)" name="Pin">
       <a name="appearance" val="classic"/>
