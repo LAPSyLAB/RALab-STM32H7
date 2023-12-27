@@ -5,35 +5,39 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000298  24000000  24000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         0000012c  24000298  24000298  00010298  2**2
+  1 .text         0000019c  24000298  24000298  00010298  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  240003c4  240003c4  00020014  2**0
+  2 .rodata       00000000  24000434  24000434  0002001c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .init_array   00000004  240003c4  240003c4  000103c4  2**2
+  3 .init_array   00000004  24000434  24000434  00010434  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  4 .fini_array   00000004  240003c8  240003c8  000103c8  2**2
+  4 .fini_array   00000004  24000438  24000438  00010438  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  5 .data         00000014  20000000  240003cc  00020000  2**2
+  5 .data         0000001c  20000000  2400043c  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .bss          0000001c  20000014  240003e0  00020014  2**2
+  6 .bss          0000001c  2000001c  24000458  0002001c  2**2
                   ALLOC
-  7 ._user_heap_stack 00000600  20000030  240003e0  00020030  2**0
+  7 ._user_heap_stack 00000600  20000038  24000458  00020038  2**0
                   ALLOC
-  8 .ARM.attributes 0000002e  00000000  00000000  00020014  2**0
+  8 .ARM.attributes 0000002e  00000000  00000000  0002001c  2**0
                   CONTENTS, READONLY
-  9 .debug_line   000000fe  00000000  00000000  00020042  2**0
+  9 .comment      00000043  00000000  00000000  0002004a  2**0
+                  CONTENTS, READONLY
+ 10 .debug_line   00000199  00000000  00000000  0002008d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 10 .debug_info   00000048  00000000  00000000  00020140  2**0
+ 11 .debug_line_str 00000152  00000000  00000000  00020226  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 11 .debug_abbrev 00000026  00000000  00000000  00020188  2**0
+ 12 .debug_info   0000006c  00000000  00000000  00020378  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 12 .debug_aranges 00000048  00000000  00000000  000201b0  2**3
+ 13 .debug_abbrev 0000003a  00000000  00000000  000203e4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_str    0000008a  00000000  00000000  000201f8  2**0
+ 14 .debug_aranges 00000068  00000000  00000000  00020420  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_ranges 00000020  00000000  00000000  00020288  2**3
+ 15 .debug_str    0000015e  00000000  00000000  00020488  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_frame  00000094  00000000  00000000  000202a8  2**2
+ 16 .debug_rnglists 00000019  00000000  00000000  000205e6  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 17 .debug_frame  0000060c  00000000  00000000  00020600  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -50,9 +54,9 @@ Disassembly of section .text:
 240002aa:	2301      	movs	r3, #1
 240002ac:	7023      	strb	r3, [r4, #0]
 240002ae:	bd10      	pop	{r4, pc}
-240002b0:	20000014 	.word	0x20000014
+240002b0:	2000001c 	.word	0x2000001c
 240002b4:	00000000 	.word	0x00000000
-240002b8:	240003ac 	.word	0x240003ac
+240002b8:	2400041c 	.word	0x2400041c
 
 240002bc <frame_dummy>:
 240002bc:	b508      	push	{r3, lr}
@@ -63,8 +67,8 @@ Disassembly of section .text:
 240002c6:	f3af 8000 	nop.w
 240002ca:	bd08      	pop	{r3, pc}
 240002cc:	00000000 	.word	0x00000000
-240002d0:	20000018 	.word	0x20000018
-240002d4:	240003ac 	.word	0x240003ac
+240002d0:	20000020 	.word	0x20000020
+240002d4:	2400041c 	.word	0x2400041c
 
 240002d8 <main>:
   .type  main, %function
@@ -73,12 +77,12 @@ Disassembly of section .text:
    	   	.align
 main:
   		ldr r0, =STEV1   // Naslov od STEV1 -> r0
-240002d8:	481c      	ldr	r0, [pc, #112]	; (2400034c <LOOP+0xa>)
+240002d8:	4832      	ldr	r0, [pc, #200]	; (240003a4 <RET+0x2>)
   		ldr r1, [r0]    // Vsebina iz naslova v r0 -> r1
 240002da:	6801      	ldr	r1, [r0, #0]
 
   		ldr r0, =STEV2   // Naslov od STEV1 -> r0
-240002dc:	481c      	ldr	r0, [pc, #112]	; (24000350 <LOOP+0xe>)
+240002dc:	4832      	ldr	r0, [pc, #200]	; (240003a8 <RET+0x6>)
   		ldr r2, [r0]	// Vsebina iz naslova v r0 -> r2
 240002de:	6802      	ldr	r2, [r0, #0]
 
@@ -86,250 +90,367 @@ main:
 240002e0:	eb01 0302 	add.w	r3, r1, r2
 
   		ldr r0, =VSOTA   // Naslov od STEV1 -> r0
-240002e4:	481b      	ldr	r0, [pc, #108]	; (24000354 <LOOP+0x12>)
+240002e4:	4831      	ldr	r0, [pc, #196]	; (240003ac <RET+0xa>)
   		str r3,[r0]		// iz registra r3 -> na naslov v r0
 240002e6:	6003      	str	r3, [r0, #0]
 
-	    bl 	INIT_IO     // Priprava za kontrolo LED diode
-240002e8:	f000 f80e 	bl	24000308 <INIT_IO>
+	    bl 	INIT        // Priprava V/I in sistemskih naprav za kontrolo LED diod in PA3
+240002e8:	f000 f813 	bl	24000312 <INIT>
 
-240002ec <loop>:
+        ldr r1,=LED1
+240002ec:	4930      	ldr	r1, [pc, #192]	; (240003b0 <RET+0xe>)
+        ldr r2,=LED2
+240002ee:	4a31      	ldr	r2, [pc, #196]	; (240003b4 <RET+0x12>)
+        ldr r3,=PA3
+240002f0:	4b31      	ldr	r3, [pc, #196]	; (240003b8 <RET+0x16>)
+
+        mov r4,#0xff    // LED(Pin) On value
+240002f2:	f04f 04ff 	mov.w	r4, #255	; 0xff
+        mov r5,#0       // LED(Pin) Off value
+240002f6:	f04f 0500 	mov.w	r5, #0
+
+240002fa <loop>:
 
 loop:
-		bl LED_ON       // Vklop LED diode
-240002ec:	f000 f81a 	bl	24000324 <LED_ON>
 
-		mov r0,#500
-240002f0:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
-		bl DELAY	 	// Zakasnitev: r0 x 1msec
-240002f4:	f000 f822 	bl	2400033c <DELAY>
+		str r4,[r1]     // Vklop LED1 diode
+240002fa:	600c      	str	r4, [r1, #0]
+		str r5,[r2]     // Izklop LED2 diode
+240002fc:	6015      	str	r5, [r2, #0]
+		str r4,[r3]     // Vklop PA3
+240002fe:	601c      	str	r4, [r3, #0]
+        bl  WRITEOUT    // Prenesi na prikljucke
+24000300:	f000 f82d 	bl	2400035e <WRITEOUT>
 
-		bl LED_OFF      // Izlop LED diode
-240002f8:	f000 f81a 	bl	24000330 <LED_OFF>
+@      delay half cycle
 
-		mov r0,#500
-240002fc:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
-		bl DELAY	 	// Zakasnitev: r0 x 1msec
-24000300:	f000 f81c 	bl	2400033c <DELAY>
+		str r5,[r1]     // Izklop LED1 diode
+24000304:	600d      	str	r5, [r1, #0]
+		str r4,[r2]     // Vklop LED2 diode
+24000306:	6014      	str	r4, [r2, #0]
+		str r5,[r3]     // Izklop PA3
+24000308:	601d      	str	r5, [r3, #0]
+        bl  WRITEOUT    // Prenesi na prikljucke
+2400030a:	f000 f828 	bl	2400035e <WRITEOUT>
+
+@      delay half cycle
 
 		b loop          // skok na vrstico loop:
-24000304:	e7f2      	b.n	240002ec <loop>
+2400030e:	e7f4      	b.n	240002fa <loop>
 
-24000306 <__end>:
+24000310 <__end>:
 
 
 __end: 	b 	__end
-24000306:	e7fe      	b.n	24000306 <__end>
+24000310:	e7fe      	b.n	24000310 <__end>
 
-24000308 <INIT_IO>:
+24000312 <INIT>:
 
 
+INIT:
+  		push {lr}
+24000312:	b500      	push	{lr}
+
+        bl INIT_IO
+24000314:	f000 f805 	bl	24000322 <INIT_IO>
+
+        ldr r1, =VTOR // Set Vector table addr. to 0x24000000
+24000318:	4928      	ldr	r1, [pc, #160]	; (240003bc <RET+0x1a>)
+		ldr r0, =0x24000000
+2400031a:	f04f 5010 	mov.w	r0, #603979776	; 0x24000000
+		str r0, [r1]
+2400031e:	6008      	str	r0, [r1, #0]
+
+	  	pop {pc}
+24000320:	bd00      	pop	{pc}
+
+24000322 <INIT_IO>:
 
 INIT_IO:
   	push {r5, r6, lr}
-24000308:	b560      	push	{r5, r6, lr}
+24000322:	b560      	push	{r5, r6, lr}
 
-	// Enable GPIOI Peripheral Clock (bit 8 in AHB4ENR register)
+	// Enable GPIOA,I,J Peripheral Clock (bit 8 in AHB4ENR register)
 	ldr r6, = RCC_AHB4ENR       // Load peripheral clock reg address to r6
-2400030a:	4e13      	ldr	r6, [pc, #76]	; (24000358 <LOOP+0x16>)
+24000324:	4e26      	ldr	r6, [pc, #152]	; (240003c0 <RET+0x1e>)
 	ldr r5, [r6]                // Read its content to r5
-2400030c:	6835      	ldr	r5, [r6, #0]
-	orr r5, #0x00000100          // Set bit 8 to enable GPIOI clock
-2400030e:	f445 7580 	orr.w	r5, r5, #256	; 0x100
+24000326:	6835      	ldr	r5, [r6, #0]
+	orr r5, #0x00000300         // Set bits 8 and 9 to enable GPIOI,J clock
+24000328:	f445 7540 	orr.w	r5, r5, #768	; 0x300
+	orr r5, #0x00000001         // Set bits 1 to enable GPIOA clock
+2400032c:	f045 0501 	orr.w	r5, r5, #1
 	str r5, [r6]                // Store result in peripheral clock register
-24000312:	6035      	str	r5, [r6, #0]
+24000330:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOA Pin3 as output pin (bits 7:6 in MODER register)
+	ldr r6, =GPIOA_BASE       // Load GPIOA BASE address to r6
+24000332:	4e24      	ldr	r6, [pc, #144]	; (240003c4 <RET+0x22>)
+	ldr r5, [r6,#GPIOx_MODER]  // Read GPIOA_MODER content to r5
+24000334:	6835      	ldr	r5, [r6, #0]
+	and r5, #0xFFFFFF3F          // Clear bits 7-6 for PA3
+24000336:	f025 05c0 	bic.w	r5, r5, #192	; 0xc0
+	orr r5, #0x00000040          // Write 01 to bits 7-6 for PA3
+2400033a:	f045 0540 	orr.w	r5, r5, #64	; 0x40
+	str r5, [r6]                // Store result in GPIO MODER register
+2400033e:	6035      	str	r5, [r6, #0]
 
 	// Make GPIOI Pin13 as output pin (bits 27:26 in MODER register)
-	ldr r6, =GPIOI_BASE       // Load GPIOD BASE address to r6
-24000314:	4e11      	ldr	r6, [pc, #68]	; (2400035c <LOOP+0x1a>)
-	ldr r5, [r6,#GPIOx_MODER]  // Read GPIOD_MODER content to r5
-24000316:	6835      	ldr	r5, [r6, #0]
+	ldr r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
+24000340:	4e21      	ldr	r6, [pc, #132]	; (240003c8 <RET+0x26>)
+	ldr r5, [r6,#GPIOx_MODER]  // Read GPIOI_MODER content to r5
+24000342:	6835      	ldr	r5, [r6, #0]
 	and r5, #0xF3FFFFFF          // Clear bits 27-26 for P13
-24000318:	f025 6540 	bic.w	r5, r5, #201326592	; 0xc000000
+24000344:	f025 6540 	bic.w	r5, r5, #201326592	; 0xc000000
 	orr r5, #0x04000000          // Write 01 to bits 27-26 for P13
-2400031c:	f045 6580 	orr.w	r5, r5, #67108864	; 0x4000000
+24000348:	f045 6580 	orr.w	r5, r5, #67108864	; 0x4000000
 	str r5, [r6]                // Store result in GPIO MODER register
-24000320:	6035      	str	r5, [r6, #0]
+2400034c:	6035      	str	r5, [r6, #0]
+
+	// Make GPIOJ Pin2 as output pin (bits 5:4 in MODER register)
+	ldr r6, =GPIOJ_BASE       // Load GPIOJ BASE address to r6
+2400034e:	4e1f      	ldr	r6, [pc, #124]	; (240003cc <RET+0x2a>)
+	ldr r5, [r6,#GPIOx_MODER]  // Read GPIOJ_MODER content to r5
+24000350:	6835      	ldr	r5, [r6, #0]
+	and r5, #0xFFFFFFCF          // Clear bits 5-4 for P2
+24000352:	f025 0530 	bic.w	r5, r5, #48	; 0x30
+	orr r5, #0x00000010          // Write 01 to bits 5-4 for PJ2
+24000356:	f045 0510 	orr.w	r5, r5, #16
+	str r5, [r6]                // Store result in GPIO MODER register
+2400035a:	6035      	str	r5, [r6, #0]
 
   	pop {r5, r6, pc}
-24000322:	bd60      	pop	{r5, r6, pc}
+2400035c:	bd60      	pop	{r5, r6, pc}
 
-24000324 <LED_ON>:
-
-
-
-LED_ON:
-    push {r5, r6, lr}
-24000324:	b560      	push	{r5, r6, lr}
-	// Set GPIOx Pins to 0 (through BSSR register)
-	ldr    r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
-24000326:	4e0d      	ldr	r6, [pc, #52]	; (2400035c <LOOP+0x1a>)
-	mov    r5, #LEDs_ON
-24000328:	f04f 5500 	mov.w	r5, #536870912	; 0x20000000
-	str    r5, [r6,#GPIOx_BSSR] // Write to BSRR register
-2400032c:	61b5      	str	r5, [r6, #24]
-  	pop {r5, r6, pc}
-2400032e:	bd60      	pop	{r5, r6, pc}
-
-24000330 <LED_OFF>:
-
-LED_OFF:
-    push {r5, r6, lr}
-24000330:	b560      	push	{r5, r6, lr}
-	// Set GPIOx Pins to 1 (through BSSR register)
-	ldr    r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
-24000332:	4e0a      	ldr	r6, [pc, #40]	; (2400035c <LOOP+0x1a>)
-	mov    r5, #LEDs_OFF
-24000334:	f44f 5500 	mov.w	r5, #8192	; 0x2000
-	str    r5, [r6,#GPIOx_BSSR] // Write to BSRR register
-24000338:	61b5      	str	r5, [r6, #24]
-  	pop {r5, r6, pc}
-2400033a:	bd60      	pop	{r5, r6, pc}
-
-2400033c <DELAY>:
+2400035e <WRITEOUT>:
 
 
-// Delay with internal SW loop approx. r0 x ms
-DELAY:
-    push {r1, lr}
-2400033c:	b502      	push	{r1, lr}
+WRITEOUT:
 
-2400033e <MSEC>:
+		push {r3, r4, r5, r6, lr}
+2400035e:	b578      	push	{r3, r4, r5, r6, lr}
+// -----------------------------------
+//      Set LED1 from LED1 variable
+		ldr r3,=LED1 // Load LED1 value
+24000360:	4b13      	ldr	r3, [pc, #76]	; (240003b0 <RET+0xe>)
+		ldr r4,[r3]
+24000362:	681c      	ldr	r4, [r3, #0]
 
-MSEC: ldr r1,=LEDDELAY
-2400033e:	f44f 417a 	mov.w	r1, #64000	; 0xfa00
+		cmp r4,#0
+24000364:	2c00      	cmp	r4, #0
+		beq L1ON
+24000366:	d002      	beq.n	2400036e <L1ON>
 
-24000342 <LOOP>:
-LOOP:    subs r1, r1, #1
-24000342:	3901      	subs	r1, #1
-         bne LOOP
-24000344:	d1fd      	bne.n	24000342 <LOOP>
+		mov r5, #LED1_OFF
+24000368:	f04f 0504 	mov.w	r5, #4
+		b   CONT1
+2400036c:	e001      	b.n	24000372 <CONT1>
 
-      subs r0, r0, #1
-24000346:	3801      	subs	r0, #1
-      bne MSEC
-24000348:	d1f9      	bne.n	2400033e <MSEC>
-    pop {r1, pc}
-2400034a:	bd02      	pop	{r1, pc}
+2400036e <L1ON>:
+L1ON: 	mov r5, #LED1_ON
+2400036e:	f44f 2580 	mov.w	r5, #262144	; 0x40000
+
+24000372 <CONT1>:
+
+CONT1:  // Set GPIOJ Pins through BSRR register
+		ldr r6, =GPIOJ_BASE // Load GPIOD BASE address to r6
+24000372:	4e16      	ldr	r6, [pc, #88]	; (240003cc <RET+0x2a>)
+		str r5, [r6,#GPIOx_BSRR] // Write to BSRR register
+24000374:	61b5      	str	r5, [r6, #24]
+
+// -----------------------------------
+//      Set LED2 from LED2 variable
+		ldr r3,=LED2 // Load LED1 value
+24000376:	4b0f      	ldr	r3, [pc, #60]	; (240003b4 <RET+0x12>)
+		ldr r4,[r3]
+24000378:	681c      	ldr	r4, [r3, #0]
+
+		cmp r4,#0
+2400037a:	2c00      	cmp	r4, #0
+		beq L2ON
+2400037c:	d002      	beq.n	24000384 <L2ON>
+
+		mov r5, #LED2_OFF
+2400037e:	f44f 5500 	mov.w	r5, #8192	; 0x2000
+		b   CONT2
+24000382:	e001      	b.n	24000388 <CONT2>
+
+24000384 <L2ON>:
+L2ON: 	mov r5, #LED2_ON
+24000384:	f04f 5500 	mov.w	r5, #536870912	; 0x20000000
+
+24000388 <CONT2>:
+
+CONT2:  // Set GPIOI Pins through BSRR register
+		ldr r6, =GPIOI_BASE // Load GPIOD BASE address to r6
+24000388:	4e0f      	ldr	r6, [pc, #60]	; (240003c8 <RET+0x26>)
+		str r5, [r6,#GPIOx_BSRR] // Write to BSRR register
+2400038a:	61b5      	str	r5, [r6, #24]
+
+// -----------------------------------
+//      Set PA3 from PA3 variable
+		ldr r3,=PA3 // Load PA3 value
+2400038c:	4b0a      	ldr	r3, [pc, #40]	; (240003b8 <RET+0x16>)
+		ldr r4,[r3]
+2400038e:	681c      	ldr	r4, [r3, #0]
+
+		cmp r4,#0
+24000390:	2c00      	cmp	r4, #0
+		beq L3ON
+24000392:	d002      	beq.n	2400039a <L3ON>
+
+		mov r5, #PA3_OFF
+24000394:	f44f 2500 	mov.w	r5, #524288	; 0x80000
+		b   CONT3
+24000398:	e001      	b.n	2400039e <CONT3>
+
+2400039a <L3ON>:
+L3ON: 	mov r5, #PA3_ON
+2400039a:	f04f 0508 	mov.w	r5, #8
+
+2400039e <CONT3>:
+
+CONT3:  // Set GPIOA Pins through BSRR register
+		ldr r6, =GPIOA_BASE // Load GPIOD BASE address to r6
+2400039e:	4e09      	ldr	r6, [pc, #36]	; (240003c4 <RET+0x22>)
+		str r5, [r6,#GPIOx_BSRR] // Write to BSRR register
+240003a0:	61b5      	str	r5, [r6, #24]
+
+240003a2 <RET>:
+
+
+RET: 	pop {r3, r4, r5, r6, pc }
+240003a2:	bd78      	pop	{r3, r4, r5, r6, pc}
   		ldr r0, =STEV1   // Naslov od STEV1 -> r0
-2400034c:	20000004 	.word	0x20000004
+240003a4:	20000004 	.word	0x20000004
   		ldr r0, =STEV2   // Naslov od STEV1 -> r0
-24000350:	20000008 	.word	0x20000008
+240003a8:	20000008 	.word	0x20000008
   		ldr r0, =VSOTA   // Naslov od STEV1 -> r0
-24000354:	2000000c 	.word	0x2000000c
+240003ac:	2000000c 	.word	0x2000000c
+        ldr r1,=LED1
+240003b0:	20000010 	.word	0x20000010
+        ldr r2,=LED2
+240003b4:	20000014 	.word	0x20000014
+        ldr r3,=PA3
+240003b8:	20000018 	.word	0x20000018
+        ldr r1, =VTOR // Set Vector table addr. to 0x24000000
+240003bc:	e000ed08 	.word	0xe000ed08
 	ldr r6, = RCC_AHB4ENR       // Load peripheral clock reg address to r6
-24000358:	580244e0 	.word	0x580244e0
-	ldr r6, =GPIOI_BASE       // Load GPIOD BASE address to r6
-2400035c:	58022000 	.word	0x58022000
+240003c0:	580244e0 	.word	0x580244e0
+	ldr r6, =GPIOA_BASE       // Load GPIOA BASE address to r6
+240003c4:	58020000 	.word	0x58020000
+	ldr r6, =GPIOI_BASE       // Load GPIOI BASE address to r6
+240003c8:	58022000 	.word	0x58022000
+	ldr r6, =GPIOJ_BASE       // Load GPIOJ BASE address to r6
+240003cc:	58022400 	.word	0x58022400
 
-24000360 <Reset_Handler>:
+240003d0 <Reset_Handler>:
 
   .section  .text.Reset_Handler
   .weak  Reset_Handler
   .type  Reset_Handler, %function
 Reset_Handler:
   ldr   sp, =_estack      /* set stack pointer */
-24000360:	f8df d02c 	ldr.w	sp, [pc, #44]	; 24000390 <LoopFillZerobss+0xa>
+240003d0:	f8df d02c 	ldr.w	sp, [pc, #44]	; 24000400 <LoopFillZerobss+0xa>
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
-24000364:	480b      	ldr	r0, [pc, #44]	; (24000394 <LoopFillZerobss+0xe>)
+240003d4:	480b      	ldr	r0, [pc, #44]	; (24000404 <LoopFillZerobss+0xe>)
   ldr r1, =_edata
-24000366:	490c      	ldr	r1, [pc, #48]	; (24000398 <LoopFillZerobss+0x12>)
+240003d6:	490c      	ldr	r1, [pc, #48]	; (24000408 <LoopFillZerobss+0x12>)
   ldr r2, =_sidata
-24000368:	4a0c      	ldr	r2, [pc, #48]	; (2400039c <LoopFillZerobss+0x16>)
+240003d8:	4a0c      	ldr	r2, [pc, #48]	; (2400040c <LoopFillZerobss+0x16>)
   movs r3, #0
-2400036a:	2300      	movs	r3, #0
+240003da:	2300      	movs	r3, #0
   b LoopCopyDataInit
-2400036c:	e002      	b.n	24000374 <LoopCopyDataInit>
+240003dc:	e002      	b.n	240003e4 <LoopCopyDataInit>
 
-2400036e <CopyDataInit>:
+240003de <CopyDataInit>:
 
 CopyDataInit:
   ldr r4, [r2, r3]
-2400036e:	58d4      	ldr	r4, [r2, r3]
+240003de:	58d4      	ldr	r4, [r2, r3]
   str r4, [r0, r3]
-24000370:	50c4      	str	r4, [r0, r3]
+240003e0:	50c4      	str	r4, [r0, r3]
   adds r3, r3, #4
-24000372:	3304      	adds	r3, #4
+240003e2:	3304      	adds	r3, #4
 
-24000374 <LoopCopyDataInit>:
+240003e4 <LoopCopyDataInit>:
 
 LoopCopyDataInit:
   adds r4, r0, r3
-24000374:	18c4      	adds	r4, r0, r3
+240003e4:	18c4      	adds	r4, r0, r3
   cmp r4, r1
-24000376:	428c      	cmp	r4, r1
+240003e6:	428c      	cmp	r4, r1
   bcc CopyDataInit
-24000378:	d3f9      	bcc.n	2400036e <CopyDataInit>
+240003e8:	d3f9      	bcc.n	240003de <CopyDataInit>
 
 /* Zero fill the bss segment. */
   ldr r2, =_sbss
-2400037a:	4a09      	ldr	r2, [pc, #36]	; (240003a0 <LoopFillZerobss+0x1a>)
+240003ea:	4a09      	ldr	r2, [pc, #36]	; (24000410 <LoopFillZerobss+0x1a>)
   ldr r4, =_ebss
-2400037c:	4c09      	ldr	r4, [pc, #36]	; (240003a4 <LoopFillZerobss+0x1e>)
+240003ec:	4c09      	ldr	r4, [pc, #36]	; (24000414 <LoopFillZerobss+0x1e>)
   movs r3, #0
-2400037e:	2300      	movs	r3, #0
+240003ee:	2300      	movs	r3, #0
   b LoopFillZerobss
-24000380:	e001      	b.n	24000386 <LoopFillZerobss>
+240003f0:	e001      	b.n	240003f6 <LoopFillZerobss>
 
-24000382 <FillZerobss>:
+240003f2 <FillZerobss>:
 
 FillZerobss:
   str  r3, [r2]
-24000382:	6013      	str	r3, [r2, #0]
+240003f2:	6013      	str	r3, [r2, #0]
   adds r2, r2, #4
-24000384:	3204      	adds	r2, #4
+240003f4:	3204      	adds	r2, #4
 
-24000386 <LoopFillZerobss>:
+240003f6 <LoopFillZerobss>:
 
 LoopFillZerobss:
   cmp r2, r4
-24000386:	42a2      	cmp	r2, r4
+240003f6:	42a2      	cmp	r2, r4
   bcc FillZerobss
-24000388:	d3fb      	bcc.n	24000382 <FillZerobss>
+240003f8:	d3fb      	bcc.n	240003f2 <FillZerobss>
 
 /* Call the application's entry point.*/
 //eternal:  b  eternal
   bl  main
-2400038a:	f7ff ffa5 	bl	240002d8 <main>
+240003fa:	f7ff ff6d 	bl	240002d8 <main>
   bx  lr
-2400038e:	4770      	bx	lr
+240003fe:	4770      	bx	lr
   ldr   sp, =_estack      /* set stack pointer */
-24000390:	20020000 	.word	0x20020000
+24000400:	20020000 	.word	0x20020000
   ldr r0, =_sdata
-24000394:	20000000 	.word	0x20000000
+24000404:	20000000 	.word	0x20000000
   ldr r1, =_edata
-24000398:	20000014 	.word	0x20000014
+24000408:	2000001c 	.word	0x2000001c
   ldr r2, =_sidata
-2400039c:	240003cc 	.word	0x240003cc
+2400040c:	2400043c 	.word	0x2400043c
   ldr r2, =_sbss
-240003a0:	20000014 	.word	0x20000014
+24000410:	2000001c 	.word	0x2000001c
   ldr r4, =_ebss
-240003a4:	20000030 	.word	0x20000030
+24000414:	20000038 	.word	0x20000038
 
-240003a8 <ADC3_IRQHandler>:
+24000418 <ADC3_IRQHandler>:
  * @retval None
 */
     .section  .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b  Infinite_Loop
-240003a8:	e7fe      	b.n	240003a8 <ADC3_IRQHandler>
+24000418:	e7fe      	b.n	24000418 <ADC3_IRQHandler>
 	...
 
-240003ac <_init>:
-240003ac:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-240003ae:	bf00      	nop
-240003b0:	bcf8      	pop	{r3, r4, r5, r6, r7}
-240003b2:	bc08      	pop	{r3}
-240003b4:	469e      	mov	lr, r3
-240003b6:	4770      	bx	lr
+2400041c <_init>:
+2400041c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+2400041e:	bf00      	nop
+24000420:	bcf8      	pop	{r3, r4, r5, r6, r7}
+24000422:	bc08      	pop	{r3}
+24000424:	469e      	mov	lr, r3
+24000426:	4770      	bx	lr
 
-240003b8 <_fini>:
-240003b8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-240003ba:	bf00      	nop
-240003bc:	bcf8      	pop	{r3, r4, r5, r6, r7}
-240003be:	bc08      	pop	{r3}
-240003c0:	469e      	mov	lr, r3
-240003c2:	4770      	bx	lr
+24000428 <_fini>:
+24000428:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+2400042a:	bf00      	nop
+2400042c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+2400042e:	bc08      	pop	{r3}
+24000430:	469e      	mov	lr, r3
+24000432:	4770      	bx	lr
