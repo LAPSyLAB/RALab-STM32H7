@@ -47,7 +47,7 @@
   <circuit name="main">
     <a name="circuit" val="main"/>
     <a name="clabelfont" val="SansSerif plain 12"/>
-    <a name="simulationFrequency" val="128.0"/>
+    <a name="simulationFrequency" val="1.0"/>
     <comp lib="0" loc="(160,90)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="south"/>
@@ -81,6 +81,9 @@
     <comp lib="4" loc="(440,150)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
+    <comp lib="5" loc="(300,90)" name="LedBar">
+      <a name="matrixcols" val="3"/>
+    </comp>
     <comp lib="5" loc="(430,80)" name="Hex Digit Display"/>
     <comp lib="6" loc="(160,64)" name="Text">
       <a name="text" val="4"/>
@@ -94,22 +97,28 @@
     <wire from="(120,170)" to="(120,200)"/>
     <wire from="(120,170)" to="(140,170)"/>
     <wire from="(120,200)" to="(200,200)"/>
-    <wire from="(160,130)" to="(470,130)"/>
+    <wire from="(160,130)" to="(300,130)"/>
     <wire from="(160,90)" to="(160,130)"/>
     <wire from="(180,150)" to="(220,150)"/>
     <wire from="(180,170)" to="(200,170)"/>
-    <wire from="(190,120)" to="(340,120)"/>
+    <wire from="(190,120)" to="(310,120)"/>
     <wire from="(190,90)" to="(190,120)"/>
     <wire from="(200,170)" to="(200,200)"/>
     <wire from="(220,110)" to="(220,150)"/>
-    <wire from="(220,110)" to="(480,110)"/>
+    <wire from="(220,110)" to="(320,110)"/>
     <wire from="(220,150)" to="(270,150)"/>
     <wire from="(220,90)" to="(220,110)"/>
     <wire from="(250,170)" to="(250,200)"/>
     <wire from="(250,170)" to="(270,170)"/>
     <wire from="(250,200)" to="(330,200)"/>
+    <wire from="(300,130)" to="(470,130)"/>
+    <wire from="(300,90)" to="(300,130)"/>
+    <wire from="(310,120)" to="(340,120)"/>
     <wire from="(310,150)" to="(340,150)"/>
     <wire from="(310,170)" to="(330,170)"/>
+    <wire from="(310,90)" to="(310,120)"/>
+    <wire from="(320,110)" to="(480,110)"/>
+    <wire from="(320,90)" to="(320,110)"/>
     <wire from="(330,170)" to="(330,200)"/>
     <wire from="(340,120)" to="(340,150)"/>
     <wire from="(340,120)" to="(480,120)"/>
